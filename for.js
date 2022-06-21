@@ -127,6 +127,21 @@ function thirdTask() {
 // ----------------------------------------------------------------------------------------------------
 
 
+let resultPyram = "";
+let pyramidLength = 10;
+
+for (let i = 1; i <= pyramidLength; i++){
+    for(let j = 0; j < i; j++){
+        resultPyram += "*";
+    }
+    resultPyram += '\n';
+}
+
+console.log(resultPyram);
+
+// ----------------------------------------------------------------------------------------------------
+
+
 const lines = 5;
 let result = '';
 
