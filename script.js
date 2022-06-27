@@ -1,6 +1,5 @@
-let numberOfFilms = +prompt("How many films do you saw?", "");
 
-
+let numberOfFilms;
 let personalMovieDB = {
     count: numberOfFilms,
     movies: {},
@@ -10,27 +9,66 @@ let personalMovieDB = {
 };
 
 
+start();
+console.log(`You watched ${numberOfFilms} films`);
+rememberFilms();
+// detectPersonalLevel();
+// writeYourGenres();
+showMyDb(personalMovieDB.privat);
 
-for(let i = 0; i < 2; i++){
-    let lastFilm = prompt("Last film you watched?", "");
-    let filmRating = prompt("How do you rate this film?", "");
+// --------------------------------------------------------------------Functions------------------------------------------------------------------------------------------------//
 
-    if(lastFilm != null && filmRating != null && lastFilm != '' && filmRating != '' && lastFilm.length < 50 ){
-        personalMovieDB.movies[lastFilm] = filmRating;
-    } else {
-        i--;
+function start() {
+     numberOfFilms = +prompt("How many films do you saw?", "").trim(); 
+    
+    while(numberOfFilms == '' || numberOfFilms == null || isNaN(numberOfFilms)) {
+        numberOfFilms = +prompt("How many films do you saw?", "").trim(); 
     }
 
+    personalMovieDB.count = numberOfFilms;
 }
 
-if (personalMovieDB.count < 10){
-    console.log("You are not filmlover");
-} else if (personalMovieDB >= 10 && personalMovieDB < 30){
-    console.log("You are medium filmlover");
-} else if (personalMovieDB >= 30 ) {
-    console.log("You are filmlover");
-} else {
-    console.log("error");
+function rememberFilms() {
+    for(let i = 0; i < 2; i++){
+        let lastFilm = prompt("Last film you watched?", "").trim();
+        let filmRating = prompt("How do you rate this film?", "").trim();
+    
+        if(lastFilm != null && filmRating != null && lastFilm != '' && filmRating != '' && lastFilm.length < 50 ){
+            personalMovieDB.movies[lastFilm] = filmRating;
+        } else {
+            i--;
+        }
+    
+    }    
 }
 
-console.log(personalMovieDB);
+function detectPersonalLevel() {
+    if (personalMovieDB.count < 10){
+        console.log("You are not filmlover");
+    } else if (personalMovieDB.count >= 10 && personalMovieDB.count < 30){
+        console.log("You are medium filmlover");
+    } else if (personalMovieDB.count >= 30 ) {
+        console.log("You are filmlover");
+    } else {
+        console.log("error");
+    }
+}
+
+function showMyDb(hidden) {
+    if(!hidden){
+        console.log(personalMovieDB);
+    }
+}
+
+function writeYourGenres() {
+    for(let i = 0; i < 3; i++){
+        let favoriteGenre = prompt(`Your favorite genre ${i+1}` , "");
+    
+        if(favoriteGenre != null && favoriteGenre != null && favoriteGenre != '' && favoriteGenre != '' && favoriteGenre.length < 50 ){
+            personalMovieDB.genres[i] = `${i+1}.${favoriteGenre}`;
+        } else {
+            i--;
+        }
+    
+    }    
+}
